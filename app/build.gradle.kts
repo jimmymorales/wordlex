@@ -10,8 +10,7 @@ android {
     defaultConfig {
         applicationId = "dev.jimmymorales.wordlex"
         minSdk = 23
-        // targetSdk = 32
-        targetSdkPreview = "Tiramisu"
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +35,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+        )
     }
     buildFeatures {
         compose = true
