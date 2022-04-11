@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import dev.jimmymorales.wordlex.ui.board.Board
 import dev.jimmymorales.wordlex.ui.keyboard.Keyboard
 import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
 
@@ -48,6 +49,7 @@ fun AppScaffold(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Board(modifier = Modifier.weight(1f))
             Keyboard()
         }
     }
