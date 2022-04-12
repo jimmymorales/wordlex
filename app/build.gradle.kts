@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.lifetime)
 
     implementation(libs.bundles.compose.ui)
+//    implementation(libs.androidx.compose.material.icons)
     debugImplementation(libs.bundles.compose.ui.debug)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 

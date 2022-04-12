@@ -18,6 +18,7 @@ androidx-lifetime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", versi
 
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
