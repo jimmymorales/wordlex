@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -107,6 +108,12 @@ fun BoardTile(
         is WordleChar.CloseMatch -> Color(extendedColors.closeMatch.roles.accentContainer)
         is WordleChar.ExactMatch -> Color(extendedColors.exactMatch.roles.accentContainer)
     }
+    val contentColor = when (char) {
+        is WordleChar.Empty,
+        is WordleChar.Invalid -> contentColorFor(backgroundColor = color)
+        is WordleChar.CloseMatch -> Color(extendedColors.closeMatch.roles.onAccentContainer)
+        is WordleChar.ExactMatch -> Color(extendedColors.exactMatch.roles.onAccentContainer)
+    }
     Surface(
         modifier = modifier
             .padding(2.dp)
@@ -116,6 +123,7 @@ fun BoardTile(
             color = colorScheme.surfaceVariant,
         ).takeIf { char is WordleChar.Empty },
         color = color,
+        contentColor = contentColor,
         tonalElevation = if (char is WordleChar.Invalid) 2.dp else 0.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
