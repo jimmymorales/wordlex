@@ -42,7 +42,7 @@ fun BoardTile(
     Surface(
         modifier = modifier
             .padding(2.dp)
-            .size(48.dp),
+            .size(56.dp),
         border = borderColor?.let { color -> BorderStroke(width = 2.dp, color = color) },
         color = backgroundColor,
         contentColor = contentColor,
@@ -55,7 +55,7 @@ fun BoardTile(
         Box(contentAlignment = Alignment.Center) {
             Text(
                 text = char.value.asText(),
-                fontStyle = MaterialTheme.typography.displayLarge.fontStyle,
+                style = MaterialTheme.typography.headlineMedium,
             )
         }
     }

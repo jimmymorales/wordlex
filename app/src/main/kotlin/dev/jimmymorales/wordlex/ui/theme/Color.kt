@@ -60,5 +60,5 @@ val md_theme_dark_shadow = Color(0xFF000000)
 
 val seed = Color(0xFFf36e33)
 val error = Color(0xFFba1b1b)
-val exactMatch = Color(0xFF4CAF50)
-val closeMatch = Color(0xFFFFEB3B)
+val exactMatch = Color(0xFF5FA059)
+val closeMatch = Color(0xFFC2AB4E)
