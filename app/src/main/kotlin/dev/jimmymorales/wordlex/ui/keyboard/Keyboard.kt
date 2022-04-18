@@ -14,11 +14,11 @@ fun Keyboard(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.padding(vertical = 8.dp),
+        modifier = modifier.padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        KeyboardRow(keys = keyboard.row1)
-        KeyboardRow(keys = keyboard.row2)
+        KeyboardRow(keys = keyboard.row1, modifier = Modifier.padding(bottom = 8.dp))
+        KeyboardRow(keys = keyboard.row2, modifier = Modifier.padding(bottom = 8.dp))
         KeyboardRow(keys = keyboard.row3)
     }
 }

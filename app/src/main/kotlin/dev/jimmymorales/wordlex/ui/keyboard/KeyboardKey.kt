@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -19,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import dev.jimmymorales.wordlex.ui.model.CharStatus
 import dev.jimmymorales.wordlex.ui.model.KeyboardItem
 import dev.jimmymorales.wordlex.ui.model.WordleChar
+import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
 import dev.jimmymorales.wordlex.ui.utils.backgroundColor
 import dev.jimmymorales.wordlex.ui.utils.contentColor
-import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
 
 @Composable
 fun KeyboardKey(
@@ -40,8 +41,7 @@ fun KeyboardKey(
         is KeyboardItem.KeyChar -> item.status.contentColor
     }
     Surface(
-        modifier = modifier
-            .padding(4.dp),
+        modifier = modifier,
         tonalElevation = if (item is KeyboardItem.KeyChar && item.status == CharStatus.Invalid) {
             2.dp
         } else {
@@ -49,11 +49,12 @@ fun KeyboardKey(
         },
         color = backgroundColor,
         contentColor = contentColor,
+        shape = RoundedCornerShape(4.dp),
     ) {
         Box(
             modifier = Modifier
                 .wrapContentSize()
-                .defaultMinSize(minWidth = 32.dp, minHeight = 32.dp)
+                .defaultMinSize(minWidth = 28.dp, minHeight = 56.dp)
                 .clickable {
                     // TODO: Select Key
                 }
@@ -63,12 +64,14 @@ fun KeyboardKey(
             when (item) {
                 is KeyboardItem.Enter -> Text(
                     text = "ENTER",
+                    style = MaterialTheme.typography.bodySmall,
                 )
                 is KeyboardItem.KeyChar -> Text(
                     text = item.value.toString(),
+                    style = MaterialTheme.typography.bodySmall,
                 )
                 is KeyboardItem.Icon -> Icon(
-                    modifier = Modifier.size(20.dp),
+                    modifier = Modifier.padding(horizontal = 8.dp).size(20.dp),
                     imageVector = item.value,
                     contentDescription = null,
                 )
