@@ -71,7 +71,9 @@ fun KeyboardKey(
                     style = MaterialTheme.typography.bodySmall,
                 )
                 is KeyboardItem.Icon -> Icon(
-                    modifier = Modifier.padding(horizontal = 8.dp).size(20.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .size(20.dp),
                     imageVector = item.value,
                     contentDescription = null,
                 )

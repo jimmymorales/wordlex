@@ -1,6 +1,5 @@
 package dev.jimmymorales.wordlex.ui.theme
 
-import android.os.Build
 import androidx.annotation.ColorInt
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -16,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.google.android.material.color.ColorRoles
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 
 private val LightThemeColors = lightColorScheme(
@@ -78,18 +78,19 @@ private val DarkThemeColors = darkColorScheme(
 @Composable
 fun WordleXTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
-    isDynamicColor: Boolean = true,
+    useDynamicColor: Boolean = DynamicColors.isDynamicColorAvailable(),
     content: @Composable () -> Unit
 ) {
-    val dynamicColor = isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val colors = if (dynamicColor) {
+    val colors = if (useDynamicColor) {
         val context = LocalContext.current
         if (useDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     } else {
         if (useDarkTheme) DarkThemeColors else LightThemeColors
     }
 
-    val extendedColors = harmonizeCustomColors(colors, !useDarkTheme)
+    val extendedColors = initializeExtended.let { extendedColors ->
+        if (useDynamicColor) extendedColors.harmonize(colors, !useDarkTheme) else extendedColors
+    }
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
             colorScheme = colors,
@@ -125,10 +126,10 @@ private val initializeExtended = ExtendedColors(
 
 val LocalExtendedColors = staticCompositionLocalOf { initializeExtended }
 
-private fun harmonizeCustomColors(
+private fun ExtendedColors.harmonize(
     colorScheme: ColorScheme,
     isLight: Boolean
-): ExtendedColors = initializeExtended.apply {
+): ExtendedColors = apply {
     exactMatch.roles = exactMatch.color.harmonize(colorScheme.primary).getColorRoles(isLight)
     closeMatch.roles = closeMatch.color.harmonize(colorScheme.primary).getColorRoles(isLight)
 }
