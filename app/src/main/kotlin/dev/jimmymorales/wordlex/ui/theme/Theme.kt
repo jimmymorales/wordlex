@@ -1,8 +1,6 @@
 package dev.jimmymorales.wordlex.ui.theme
 
-import androidx.annotation.ColorInt
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -10,13 +8,11 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import com.google.android.material.color.ColorRoles
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.MaterialColors
 
 private val LightThemeColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -88,55 +84,34 @@ fun WordleXTheme(
         if (useDarkTheme) DarkThemeColors else LightThemeColors
     }
 
-    val extendedColors = initializeExtended.let { extendedColors ->
-        if (useDynamicColor) extendedColors.harmonize(colors, !useDarkTheme) else extendedColors
-    }
-    CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
+    val extendedColors = MaterialTheme.extendedColors
+    val rememberedExtendedColors = remember { extendedColors.copy() }
+        .apply { if (useDynamicColor) harmonize(colors, !useDarkTheme) }
+    CompositionLocalProvider(LocalExtendedColors provides rememberedExtendedColors) {
         MaterialTheme(
             colorScheme = colors,
             typography = AppTypography,
-            content = content
+            content = content,
         )
     }
 }
-
-data class CustomColor(
-    val name: String,
-    val color: Color,
-    var roles: ColorRoles,
-)
-
-data class ExtendedColors(
-    val exactMatch: CustomColor,
-    val closeMatch: CustomColor,
-)
 
 private val initializeExtended = ExtendedColors(
     exactMatch = CustomColor(
         name = "exact-match",
         color = exactMatch,
-        roles = exactMatch.toArgb().getColorRoles(),
     ),
     closeMatch = CustomColor(
         name = "close-match",
         color = closeMatch,
-        roles = closeMatch.toArgb().getColorRoles(),
     ),
 )
 
 val LocalExtendedColors = staticCompositionLocalOf { initializeExtended }
 
-private fun ExtendedColors.harmonize(
-    colorScheme: ColorScheme,
-    isLight: Boolean
-): ExtendedColors = apply {
-    exactMatch.roles = exactMatch.color.harmonize(colorScheme.primary).getColorRoles(isLight)
-    closeMatch.roles = closeMatch.color.harmonize(colorScheme.primary).getColorRoles(isLight)
-}
+@Suppress("unused")
+val MaterialTheme.extendedColors: ExtendedColors
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalExtendedColors.current
 
-@ColorInt
-private fun Color.harmonize(color: Color): Int = MaterialColors.harmonize(toArgb(), color.toArgb())
-
-private fun @receiver:ColorInt Int.getColorRoles(
-    isLight: Boolean = true,
-): ColorRoles = MaterialColors.getColorRoles(this, isLight)
