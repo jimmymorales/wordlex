@@ -4,4 +4,15 @@ plugins {
     alias(libs.plugins.android.gradle.lib) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.ben.manes.versions)
+    alias(libs.plugins.detekt)
+}
+
+subprojects {
+    apply {
+        plugin("io.gitlab.arturbosch.detekt")
+    }
+
+    detekt {
+        config = rootProject.files("config/detekt/detekt.yml")
+    }
 }

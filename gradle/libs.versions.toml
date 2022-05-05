@@ -7,6 +7,7 @@ androidx-test-junit4 = "1.1.4-alpha06"
 compose = "1.2.0-alpha08"
 composeActivity = "1.5.0-beta01"
 composeMaterial3 = "1.0.0-alpha10"
+detekt = "1.20.0"
 junit = "4.13.2"
 kotlin = "1.6.20"
 material = "1.7.0-alpha01"
@@ -39,6 +40,8 @@ compose-ui-debug = ["androidx-compose-ui-tooling", "androidx-compose-ui-test-man
 [plugins]
 android-gradle-app = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-gradle-lib = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
