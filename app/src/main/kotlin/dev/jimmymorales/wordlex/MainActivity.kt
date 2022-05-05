@@ -83,7 +83,7 @@ private val mockBoard = BoardState(
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+private fun DefaultPreview() {
     WordleXTheme {
         AppScaffold()
     }

@@ -56,7 +56,7 @@ fun KeyboardKey(
                 .wrapContentSize()
                 .defaultMinSize(minWidth = 28.dp, minHeight = 56.dp)
                 .clickable {
-                    // TODO: Select Key
+                    TODO("Select Key")
                 }
                 .padding(4.dp),
             contentAlignment = Alignment.Center,
@@ -84,7 +84,7 @@ fun KeyboardKey(
 
 @Preview
 @Composable
-fun KeyPreview() {
+private fun KeyPreview() {
     WordleXTheme {
         KeyboardKey(KeyboardItem.KeyChar(value = WordleChar.W, status = CharStatus.ExactMatch))
     }

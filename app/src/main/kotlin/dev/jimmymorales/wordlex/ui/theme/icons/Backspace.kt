@@ -8,10 +8,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Suppress("unused")
 val Icons.Filled.Backspace: ImageVector
     get() {
-        if (backspace != null) {
-            return backspace!!
-        }
-        backspace = materialIcon(name = "Filled.Backspace") {
+        val icon = backspace
+        if (icon != null) return icon
+
+        return materialIcon(name = "Filled.Backspace") {
             materialPath {
                 moveTo(22.0f, 3.0f)
                 lineTo(7.0f, 3.0f)
@@ -39,8 +39,7 @@ val Icons.Filled.Backspace: ImageVector
                 lineTo(19.0f, 15.59f)
                 close()
             }
-        }
-        return backspace!!
+        }.also { backspace = it }
     }
 
 private var backspace: ImageVector? = null
