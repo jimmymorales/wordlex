@@ -86,6 +86,8 @@ fun KeyboardKey(
 @Composable
 private fun KeyPreview() {
     WordleXTheme {
-        KeyboardKey(KeyboardItem.KeyChar(value = WordleChar.W, status = CharStatus.ExactMatch))
+        KeyboardKey(
+            KeyboardItem.KeyChar(value = WordleChar.W, status = CharStatus.ExactMatch)
+        )
     }
 }
