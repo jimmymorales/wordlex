@@ -86,7 +86,7 @@ fun WordleXTheme(
 
     val extendedColors = MaterialTheme.extendedColors
     val rememberedExtendedColors = remember { extendedColors.copy() }
-        .apply { if (useDynamicColor) harmonize(colors, !useDarkTheme) }
+        .apply { harmonize(colors, !useDarkTheme) }
     CompositionLocalProvider(LocalExtendedColors provides rememberedExtendedColors) {
         MaterialTheme(
             colorScheme = colors,

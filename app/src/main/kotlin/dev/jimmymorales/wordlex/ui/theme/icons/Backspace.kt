@@ -1,9 +1,15 @@
 package dev.jimmymorales.wordlex.ui.theme.icons
 
+import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
+import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
 
 @Suppress("unused")
 val Icons.Filled.Backspace: ImageVector
@@ -43,3 +49,14 @@ val Icons.Filled.Backspace: ImageVector
     }
 
 private var backspace: ImageVector? = null
+
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun BackspacePreview() {
+    WordleXTheme {
+        Surface {
+            Icon(Icons.Filled.Backspace, contentDescription = null)
+        }
+    }
+}

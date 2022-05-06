@@ -1,5 +1,6 @@
 package dev.jimmymorales.wordlex.ui.keyboard
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,11 +18,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import dev.jimmymorales.wordlex.ui.model.CharStatus
 import dev.jimmymorales.wordlex.ui.model.KeyboardItem
 import dev.jimmymorales.wordlex.ui.model.WordleChar
 import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
+import dev.jimmymorales.wordlex.ui.theme.icons.Backspace
 import dev.jimmymorales.wordlex.ui.utils.backgroundColor
 import dev.jimmymorales.wordlex.ui.utils.contentColor
 
@@ -82,12 +87,26 @@ fun KeyboardKey(
     }
 }
 
+internal class KeyCharPreviewParameterProvider : CollectionPreviewParameterProvider<KeyboardItem>(
+    listOf(
+        KeyboardItem.KeyChar(value = WordleChar.Q, status = CharStatus.ExactMatch),
+        KeyboardItem.KeyChar(value = WordleChar.W, status = CharStatus.CloseMatch),
+        KeyboardItem.KeyChar(value = WordleChar.E, status = CharStatus.Invalid),
+        KeyboardItem.KeyChar(value = WordleChar.R, status = CharStatus.Available),
+        KeyboardItem.Enter,
+        KeyboardItem.Icon(Icons.Default.Backspace)
+    )
+)
+
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun KeyPreview() {
+private fun KeyPreview(
+    @PreviewParameter(KeyCharPreviewParameterProvider::class) keyChar: KeyboardItem,
+) {
     WordleXTheme {
-        KeyboardKey(
-            KeyboardItem.KeyChar(value = WordleChar.W, status = CharStatus.ExactMatch)
-        )
+        Surface {
+            KeyboardKey(item = keyChar)
+        }
     }
 }
