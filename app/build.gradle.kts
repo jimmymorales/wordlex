@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "dev.jimmymorales.wordlex"
         minSdk = 23
-        targetSdk = 32
+        targetSdkPreview = "Tiramisu"
         versionCode = 1
         versionName = "1.0"
 
