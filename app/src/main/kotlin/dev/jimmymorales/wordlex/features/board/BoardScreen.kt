@@ -6,26 +6,31 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.jimmymorales.wordlex.features.board.components.Board
-import dev.jimmymorales.wordlex.features.board.components.mockBoard
 import dev.jimmymorales.wordlex.features.board.components.keyboard.Keyboard
-import dev.jimmymorales.wordlex.model.KeyboardState
 import dev.jimmymorales.wordlex.theme.WordleXTheme
 
 @Composable
-fun BoardScreen(modifier: Modifier = Modifier) {
+fun BoardScreen(
+    modifier: Modifier = Modifier,
+    viewModel: BoardViewModel = viewModel(),
+) {
+    val uiState by viewModel.state.collectAsState()
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Board(
-            board = mockBoard, modifier = Modifier.weight(1f)
+            board = uiState.board, modifier = Modifier.weight(1f)
         )
-        Keyboard(state = KeyboardState())
+        Keyboard(state = uiState.keyboard)
     }
 }
 

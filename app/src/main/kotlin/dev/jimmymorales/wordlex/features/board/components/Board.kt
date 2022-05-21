@@ -7,11 +7,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dev.jimmymorales.wordlex.features.board.mockBoard
 import dev.jimmymorales.wordlex.model.BoardState
-import dev.jimmymorales.wordlex.model.CharStatus
-import dev.jimmymorales.wordlex.model.Word
-import dev.jimmymorales.wordlex.model.WordTile
-import dev.jimmymorales.wordlex.model.WordleChar
 import dev.jimmymorales.wordlex.theme.WordleXTheme
 
 @Composable
@@ -31,23 +28,6 @@ fun Board(
         WordRow(word = board.word6)
     }
 }
-
-internal val mockBoard = BoardState(
-    word1 = Word(
-        WordTile.Filled(value = WordleChar.R, status = CharStatus.ExactMatch),
-        WordTile.Filled(value = WordleChar.A, status = CharStatus.CloseMatch),
-        WordTile.Filled(value = WordleChar.D, status = CharStatus.Invalid),
-        WordTile.Filled(value = WordleChar.I, status = CharStatus.Invalid),
-        WordTile.Filled(value = WordleChar.O, status = CharStatus.CloseMatch),
-    ),
-    word2 = Word(
-        WordTile.Editing(value = WordleChar.R),
-        WordTile.Empty,
-        WordTile.Empty,
-        WordTile.Empty,
-        WordTile.Empty,
-    ),
-)
 
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)

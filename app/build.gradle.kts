@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "dev.jimmymorales.wordlex"
         minSdk = 23
-        targetSdkPreview = "Tiramisu"
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -47,7 +47,10 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += setOf(
+                "/META-INF/{AL2.0,LGPL2.1}",
+                "DebugProbesKt.bin"
+            )
         }
     }
 }
@@ -55,11 +58,14 @@ android {
 dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifetime)
+    implementation(libs.androidx.lifetime.compose)
 
     implementation(libs.bundles.compose.ui)
 //    implementation(libs.androidx.compose.material.icons)
     debugImplementation(libs.bundles.compose.ui.debug)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    implementation(libs.kotlinx.coroutines)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit4)
