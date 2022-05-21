@@ -30,7 +30,9 @@ fun BoardScreen(
         Board(
             board = uiState.board, modifier = Modifier.weight(1f)
         )
-        Keyboard(state = uiState.keyboard)
+        Keyboard(
+            state = uiState.keyboard,
+            onKeyPressed = { key -> viewModel.onIntent(BoardIntent.KeyPressed(key)) })
     }
 }
 

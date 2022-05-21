@@ -33,6 +33,7 @@ import dev.jimmymorales.wordlex.utils.contentColor
 fun KeyboardKey(
     item: KeyboardItem,
     modifier: Modifier = Modifier,
+    onKeyPressed: (KeyboardItem) -> Unit = {},
 ) {
     val colorScheme = MaterialTheme.colorScheme
     val backgroundColor = when (item) {
@@ -60,9 +61,7 @@ fun KeyboardKey(
             modifier = Modifier
                 .wrapContentSize()
                 .defaultMinSize(minWidth = 28.dp, minHeight = 56.dp)
-                .clickable {
-                    TODO("Select Key")
-                }
+                .clickable { onKeyPressed(item) }
                 .padding(4.dp),
             contentAlignment = Alignment.Center,
         ) {

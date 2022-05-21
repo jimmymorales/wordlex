@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.jimmymorales.wordlex.model.KeyboardItem
 import dev.jimmymorales.wordlex.model.KeyboardState
 import dev.jimmymorales.wordlex.theme.WordleXTheme
 
@@ -16,14 +17,23 @@ import dev.jimmymorales.wordlex.theme.WordleXTheme
 fun Keyboard(
     state: KeyboardState,
     modifier: Modifier = Modifier,
+    onKeyPressed: (KeyboardItem) -> Unit = {},
 ) {
     Column(
         modifier = modifier.padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        KeyboardRow(keys = state.row1, modifier = Modifier.padding(bottom = 8.dp))
-        KeyboardRow(keys = state.row2, modifier = Modifier.padding(bottom = 8.dp))
-        KeyboardRow(keys = state.row3)
+        KeyboardRow(
+            keys = state.row1,
+            modifier = Modifier.padding(bottom = 8.dp),
+            onKeyPressed = onKeyPressed
+        )
+        KeyboardRow(
+            keys = state.row2,
+            modifier = Modifier.padding(bottom = 8.dp),
+            onKeyPressed = onKeyPressed
+        )
+        KeyboardRow(keys = state.row3, onKeyPressed = onKeyPressed)
     }
 }
 

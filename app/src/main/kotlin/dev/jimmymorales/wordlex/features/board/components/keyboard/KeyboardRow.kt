@@ -19,7 +19,8 @@ import dev.jimmymorales.wordlex.theme.icons.Backspace
 @Composable
 fun KeyboardRow(
     keys: List<KeyboardItem>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onKeyPressed: (KeyboardItem) -> Unit = {},
 ) {
     Row(
         modifier = modifier,
@@ -28,7 +29,8 @@ fun KeyboardRow(
         keys.forEachIndexed { index, key ->
             KeyboardKey(
                 item = key,
-                modifier = Modifier.padding(end = if (index != keys.lastIndex) 8.dp else 0.dp)
+                modifier = Modifier.padding(end = if (index != keys.lastIndex) 8.dp else 0.dp),
+                onKeyPressed = onKeyPressed,
             )
         }
     }
