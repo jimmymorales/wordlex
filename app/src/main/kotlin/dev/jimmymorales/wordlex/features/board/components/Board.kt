@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.board
+package dev.jimmymorales.wordlex.features.board.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -7,12 +7,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.jimmymorales.wordlex.ui.model.BoardState
-import dev.jimmymorales.wordlex.ui.model.CharStatus
-import dev.jimmymorales.wordlex.ui.model.Word
-import dev.jimmymorales.wordlex.ui.model.WordTile
-import dev.jimmymorales.wordlex.ui.model.WordleChar
-import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
+import dev.jimmymorales.wordlex.model.BoardState
+import dev.jimmymorales.wordlex.model.CharStatus
+import dev.jimmymorales.wordlex.model.Word
+import dev.jimmymorales.wordlex.model.WordTile
+import dev.jimmymorales.wordlex.model.WordleChar
+import dev.jimmymorales.wordlex.theme.WordleXTheme
 
 @Composable
 fun Board(

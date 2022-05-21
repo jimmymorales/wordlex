@@ -1,12 +1,12 @@
-package dev.jimmymorales.wordlex.ui.utils
+package dev.jimmymorales.wordlex.utils
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
-import dev.jimmymorales.wordlex.ui.model.CharStatus
-import dev.jimmymorales.wordlex.ui.theme.extendedColors
+import dev.jimmymorales.wordlex.model.CharStatus
+import dev.jimmymorales.wordlex.theme.extendedColors
 
 internal val CharStatus.backgroundColor: Color
     @ReadOnlyComposable

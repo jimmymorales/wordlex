@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.keyboard
+package dev.jimmymorales.wordlex.features.board.components.keyboard
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.jimmymorales.wordlex.ui.model.CharStatus
-import dev.jimmymorales.wordlex.ui.model.KeyboardItem
-import dev.jimmymorales.wordlex.ui.model.WordleChar
-import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
-import dev.jimmymorales.wordlex.ui.theme.icons.Backspace
+import dev.jimmymorales.wordlex.model.CharStatus
+import dev.jimmymorales.wordlex.model.KeyboardItem
+import dev.jimmymorales.wordlex.model.WordleChar
+import dev.jimmymorales.wordlex.theme.WordleXTheme
+import dev.jimmymorales.wordlex.theme.icons.Backspace
 
 @Composable
 fun KeyboardRow(

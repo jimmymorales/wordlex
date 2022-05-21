@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.theme
+package dev.jimmymorales.wordlex.theme
 
 import androidx.annotation.ColorInt
 import androidx.compose.material3.ColorScheme

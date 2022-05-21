@@ -1,9 +1,9 @@
-package dev.jimmymorales.wordlex.ui.model
+package dev.jimmymorales.wordlex.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.vector.ImageVector
-import dev.jimmymorales.wordlex.ui.theme.icons.Backspace
+import dev.jimmymorales.wordlex.theme.icons.Backspace
 
 data class KeyboardState(
     val row1: List<KeyboardItem> = listOf(

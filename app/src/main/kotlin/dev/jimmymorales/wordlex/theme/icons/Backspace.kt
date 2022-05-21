@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.theme.icons
+package dev.jimmymorales.wordlex.theme.icons
 
 import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
+import dev.jimmymorales.wordlex.theme.WordleXTheme
 
 @Suppress("unused")
 val Icons.Filled.Backspace: ImageVector

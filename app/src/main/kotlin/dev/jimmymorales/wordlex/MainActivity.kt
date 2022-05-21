@@ -3,23 +3,16 @@ package dev.jimmymorales.wordlex
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import dev.jimmymorales.wordlex.ui.board.Board
-import dev.jimmymorales.wordlex.ui.board.mockBoard
-import dev.jimmymorales.wordlex.ui.keyboard.Keyboard
-import dev.jimmymorales.wordlex.ui.model.KeyboardState
-import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
+import dev.jimmymorales.wordlex.features.board.BoardScreen
+import dev.jimmymorales.wordlex.theme.WordleXTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,19 +37,7 @@ fun AppScaffold(
             )
         },
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Board(
-                board = mockBoard,
-                modifier = Modifier.weight(1f)
-            )
-            Keyboard(state = KeyboardState())
-        }
+        BoardScreen(modifier = Modifier.padding(paddingValues))
     }
 }
 

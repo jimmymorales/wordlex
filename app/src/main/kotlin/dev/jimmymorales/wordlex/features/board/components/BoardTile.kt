@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.board
+package dev.jimmymorales.wordlex.features.board.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
@@ -16,12 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import dev.jimmymorales.wordlex.ui.model.CharStatus
-import dev.jimmymorales.wordlex.ui.model.WordTile
-import dev.jimmymorales.wordlex.ui.model.WordleChar
-import dev.jimmymorales.wordlex.ui.theme.WordleXTheme
-import dev.jimmymorales.wordlex.ui.utils.backgroundColor
-import dev.jimmymorales.wordlex.ui.utils.contentColor
+import dev.jimmymorales.wordlex.model.CharStatus
+import dev.jimmymorales.wordlex.model.WordTile
+import dev.jimmymorales.wordlex.model.WordleChar
+import dev.jimmymorales.wordlex.theme.WordleXTheme
+import dev.jimmymorales.wordlex.utils.backgroundColor
+import dev.jimmymorales.wordlex.utils.contentColor
 
 @Composable
 fun BoardTile(

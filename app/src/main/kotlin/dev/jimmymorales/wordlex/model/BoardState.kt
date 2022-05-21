@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.model
+package dev.jimmymorales.wordlex.model
 
 data class BoardState(
     val word1: Word = Word(),

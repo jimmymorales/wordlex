@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.model
+package dev.jimmymorales.wordlex.model
 
 enum class CharStatus {
     ExactMatch, CloseMatch, Invalid, Available,

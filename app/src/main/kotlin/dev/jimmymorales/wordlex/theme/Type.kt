@@ -1,4 +1,4 @@
-package dev.jimmymorales.wordlex.ui.theme
+package dev.jimmymorales.wordlex.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
