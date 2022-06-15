@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import dev.jimmymorales.wordlex.model.CharStatus
 import dev.jimmymorales.wordlex.model.WordTile
 import dev.jimmymorales.wordlex.model.WordleChar
+import dev.jimmymorales.wordlex.model.label
 import dev.jimmymorales.wordlex.theme.WordleXTheme
 import dev.jimmymorales.wordlex.utils.backgroundColor
 import dev.jimmymorales.wordlex.utils.contentColor
@@ -32,12 +33,12 @@ fun BoardTile(
     val backgroundColor = when (char) {
         is WordTile.Editing,
         is WordTile.Empty -> colorScheme.surface
-        is WordTile.Filled -> char.status.backgroundColor
+        is WordTile.Filled -> char.value.status.backgroundColor
     }
     val contentColor = when (char) {
         is WordTile.Editing,
         is WordTile.Empty -> contentColorFor(backgroundColor)
-        is WordTile.Filled -> char.status.contentColor
+        is WordTile.Filled -> char.value.status.contentColor
     }
     val borderColor = when (char) {
         is WordTile.Editing -> colorScheme.outline
@@ -51,7 +52,7 @@ fun BoardTile(
         border = borderColor?.let { color -> BorderStroke(width = 2.dp, color = color) },
         color = backgroundColor,
         contentColor = contentColor,
-        tonalElevation = if (char is WordTile.Filled && char.status == CharStatus.Invalid) {
+        tonalElevation = if (char is WordTile.Filled && char.value.status == CharStatus.Invalid) {
             2.dp
         } else {
             0.dp
@@ -59,22 +60,20 @@ fun BoardTile(
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
-                text = char.value.asText(),
+                text = char.value.label,
                 style = MaterialTheme.typography.headlineMedium,
             )
         }
     }
 }
 
-private fun WordleChar.asText(): String = if (this == WordleChar.Empty) "" else this.toString()
-
 internal class WordTilePreviewParameterProvider : CollectionPreviewParameterProvider<WordTile>(
     listOf(
-        WordTile.Filled(WordleChar.A, status = CharStatus.ExactMatch),
-        WordTile.Filled(WordleChar.S, status = CharStatus.CloseMatch),
-        WordTile.Filled(WordleChar.D, status = CharStatus.Invalid),
-        WordTile.Filled(WordleChar.F, status = CharStatus.Available),
-        WordTile.Editing(WordleChar.G),
+        WordTile.Filled(WordleChar.A(status = CharStatus.ExactMatch)),
+        WordTile.Filled(WordleChar.S(status = CharStatus.CloseMatch)),
+        WordTile.Filled(WordleChar.D(status = CharStatus.Invalid)),
+        WordTile.Filled(WordleChar.F(status = CharStatus.Available)),
+        WordTile.Editing(WordleChar.G()),
         WordTile.Empty,
     )
 )

@@ -2,53 +2,42 @@ package dev.jimmymorales.wordlex.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.graphics.vector.ImageVector
 import dev.jimmymorales.wordlex.theme.icons.Backspace
 
 data class KeyboardState(
-    val row1: List<KeyboardItem> = listOf(
-        KeyboardItem.KeyChar(value = WordleChar.Q),
-        KeyboardItem.KeyChar(value = WordleChar.W),
-        KeyboardItem.KeyChar(value = WordleChar.E),
-        KeyboardItem.KeyChar(value = WordleChar.R, status = CharStatus.ExactMatch),
-        KeyboardItem.KeyChar(value = WordleChar.T),
-        KeyboardItem.KeyChar(value = WordleChar.Y),
-        KeyboardItem.KeyChar(value = WordleChar.U),
-        KeyboardItem.KeyChar(value = WordleChar.I, status = CharStatus.Invalid),
-        KeyboardItem.KeyChar(value = WordleChar.O, status = CharStatus.CloseMatch),
-        KeyboardItem.KeyChar(value = WordleChar.P),
-    ),
-    val row2: List<KeyboardItem> = listOf(
-        KeyboardItem.KeyChar(value = WordleChar.A, status = CharStatus.CloseMatch),
-        KeyboardItem.KeyChar(value = WordleChar.S),
-        KeyboardItem.KeyChar(value = WordleChar.D, status = CharStatus.Invalid),
-        KeyboardItem.KeyChar(value = WordleChar.F),
-        KeyboardItem.KeyChar(value = WordleChar.G),
-        KeyboardItem.KeyChar(value = WordleChar.H),
-        KeyboardItem.KeyChar(value = WordleChar.J),
-        KeyboardItem.KeyChar(value = WordleChar.K),
-        KeyboardItem.KeyChar(value = WordleChar.L),
-    ),
-    val row3: List<KeyboardItem> = listOf(
-        KeyboardItem.Enter,
-        KeyboardItem.KeyChar(value = WordleChar.Z),
-        KeyboardItem.KeyChar(value = WordleChar.X),
-        KeyboardItem.KeyChar(value = WordleChar.C),
-        KeyboardItem.KeyChar(value = WordleChar.V),
-        KeyboardItem.KeyChar(value = WordleChar.B),
-        KeyboardItem.KeyChar(value = WordleChar.N),
-        KeyboardItem.KeyChar(value = WordleChar.M),
-        KeyboardItem.Icon(Icons.Filled.Backspace),
-    ),
+    val a: WordleChar.A = WordleChar.A(),
+    val b: WordleChar.B = WordleChar.B(),
+    val c: WordleChar.C = WordleChar.C(),
+    val d: WordleChar.D = WordleChar.D(),
+    val e: WordleChar.E = WordleChar.E(),
+    val f: WordleChar.F = WordleChar.F(),
+    val g: WordleChar.G = WordleChar.G(),
+    val h: WordleChar.H = WordleChar.H(),
+    val i: WordleChar.I = WordleChar.I(),
+    val j: WordleChar.J = WordleChar.J(),
+    val k: WordleChar.K = WordleChar.K(),
+    val l: WordleChar.L = WordleChar.L(),
+    val m: WordleChar.M = WordleChar.M(),
+    val n: WordleChar.N = WordleChar.N(),
+    val o: WordleChar.O = WordleChar.O(),
+    val p: WordleChar.P = WordleChar.P(),
+    val q: WordleChar.Q = WordleChar.Q(),
+    val r: WordleChar.R = WordleChar.R(),
+    val s: WordleChar.S = WordleChar.S(),
+    val t: WordleChar.T = WordleChar.T(),
+    val u: WordleChar.U = WordleChar.U(),
+    val v: WordleChar.V = WordleChar.V(),
+    val w: WordleChar.W = WordleChar.W(),
+    val x: WordleChar.X = WordleChar.X(),
+    val y: WordleChar.Y = WordleChar.Y(),
+    val z: WordleChar.Z = WordleChar.Z(),
 )
 
 @Stable
 sealed interface KeyboardItem {
-    data class KeyChar(
-        val value: WordleChar,
-        val status: CharStatus = CharStatus.Available,
-    ) : KeyboardItem
+    object Backspace : KeyboardItem {
+        val icon = Icons.Filled.Backspace
+    }
 
-    data class Icon(val value: ImageVector) : KeyboardItem
     object Enter : KeyboardItem
 }

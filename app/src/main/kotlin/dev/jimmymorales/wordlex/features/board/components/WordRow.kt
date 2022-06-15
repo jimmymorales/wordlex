@@ -31,14 +31,14 @@ fun WordRow(
 internal class WordPreviewParameterProvider : CollectionPreviewParameterProvider<Word>(
     listOf(
         Word(
-            WordTile.Filled(value = WordleChar.R, status = CharStatus.ExactMatch),
-            WordTile.Filled(value = WordleChar.A, status = CharStatus.CloseMatch),
-            WordTile.Filled(value = WordleChar.D, status = CharStatus.Invalid),
-            WordTile.Filled(value = WordleChar.I, status = CharStatus.Invalid),
-            WordTile.Filled(value = WordleChar.O, status = CharStatus.CloseMatch),
+            WordTile.Filled(value = WordleChar.R(status = CharStatus.ExactMatch)),
+            WordTile.Filled(value = WordleChar.A(status = CharStatus.CloseMatch)),
+            WordTile.Filled(value = WordleChar.D(status = CharStatus.Invalid)),
+            WordTile.Filled(value = WordleChar.I(status = CharStatus.Invalid)),
+            WordTile.Filled(value = WordleChar.O(status = CharStatus.CloseMatch)),
         ),
         Word(
-            WordTile.Editing(value = WordleChar.R),
+            WordTile.Editing(value = WordleChar.R()),
         ),
         Word(),
     )

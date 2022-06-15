@@ -7,7 +7,10 @@ data class BoardState(
     val word4: Word = Word(),
     val word5: Word = Word(),
     val word6: Word = Word(),
+    val currentWordNumber: WordNumber = WordNumber.One,
 )
+
+enum class WordNumber { One, Two, Three, Four, Five, Six, None }
 
 data class Word(
     val char1: WordTile = WordTile.Empty,
@@ -20,9 +23,9 @@ data class Word(
 sealed class WordTile {
     abstract val value: WordleChar
 
-    data class Filled(override val value: WordleChar, val status: CharStatus) : WordTile()
+    data class Filled(override val value: WordleChar) : WordTile()
     data class Editing(override val value: WordleChar) : WordTile()
     object Empty : WordTile() {
-        override val value: WordleChar = WordleChar.Empty
+        override val value = WordleChar.None
     }
 }

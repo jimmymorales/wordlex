@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -24,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import dev.jimmymorales.wordlex.model.CharStatus
 import dev.jimmymorales.wordlex.model.KeyboardItem
 import dev.jimmymorales.wordlex.model.WordleChar
+import dev.jimmymorales.wordlex.model.label
 import dev.jimmymorales.wordlex.theme.WordleXTheme
-import dev.jimmymorales.wordlex.theme.icons.Backspace
 import dev.jimmymorales.wordlex.utils.backgroundColor
 import dev.jimmymorales.wordlex.utils.contentColor
 
@@ -36,19 +35,19 @@ fun KeyboardKey(
     onKeyPressed: (KeyboardItem) -> Unit = {},
 ) {
     val colorScheme = MaterialTheme.colorScheme
-    val backgroundColor = when (item) {
-        is KeyboardItem.Enter,
-        is KeyboardItem.Icon -> colorScheme.surface
-        is KeyboardItem.KeyChar -> item.status.backgroundColor
+    val backgroundColor = if (item is WordleChar) {
+        item.status.backgroundColor
+    } else {
+        colorScheme.surface
     }
-    val contentColor = when (item) {
-        is KeyboardItem.Enter,
-        is KeyboardItem.Icon -> contentColorFor(backgroundColor)
-        is KeyboardItem.KeyChar -> item.status.contentColor
+    val contentColor = if (item is WordleChar) {
+        item.status.contentColor
+    } else {
+        contentColorFor(backgroundColor)
     }
     Surface(
         modifier = modifier,
-        tonalElevation = if (item is KeyboardItem.KeyChar && item.status == CharStatus.Invalid) {
+        tonalElevation = if (item is WordleChar && item.status == CharStatus.Invalid) {
             2.dp
         } else {
             16.dp
@@ -70,32 +69,33 @@ fun KeyboardKey(
                     text = "ENTER",
                     style = MaterialTheme.typography.bodySmall,
                 )
-                is KeyboardItem.KeyChar -> Text(
-                    text = item.value.toString(),
-                    style = MaterialTheme.typography.bodySmall,
-                )
-                is KeyboardItem.Icon -> Icon(
+                is KeyboardItem.Backspace -> Icon(
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
                         .size(20.dp),
-                    imageVector = item.value,
+                    imageVector = item.icon,
                     contentDescription = null,
+                )
+                else -> Text(
+                    text = (item as WordleChar).label,
+                    style = MaterialTheme.typography.bodySmall,
                 )
             }
         }
     }
 }
 
-internal class KeyCharPreviewParameterProvider : CollectionPreviewParameterProvider<KeyboardItem>(
-    listOf(
-        KeyboardItem.KeyChar(value = WordleChar.Q, status = CharStatus.ExactMatch),
-        KeyboardItem.KeyChar(value = WordleChar.W, status = CharStatus.CloseMatch),
-        KeyboardItem.KeyChar(value = WordleChar.E, status = CharStatus.Invalid),
-        KeyboardItem.KeyChar(value = WordleChar.R, status = CharStatus.Available),
-        KeyboardItem.Enter,
-        KeyboardItem.Icon(Icons.Default.Backspace)
+internal class KeyCharPreviewParameterProvider :
+    CollectionPreviewParameterProvider<KeyboardItem>(
+        listOf(
+            WordleChar.Q(status = CharStatus.ExactMatch),
+            WordleChar.W(status = CharStatus.CloseMatch),
+            WordleChar.E(status = CharStatus.Invalid),
+            WordleChar.R(status = CharStatus.Available),
+            KeyboardItem.Enter,
+            KeyboardItem.Backspace,
+        )
     )
-)
 
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)

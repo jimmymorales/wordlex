@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.jimmymorales.wordlex.features.board.mockKeyboard
 import dev.jimmymorales.wordlex.model.KeyboardItem
 import dev.jimmymorales.wordlex.model.KeyboardState
 import dev.jimmymorales.wordlex.theme.WordleXTheme
@@ -37,13 +38,18 @@ fun Keyboard(
     }
 }
 
+private val KeyboardState.row1: List<KeyboardItem> get() = listOf(q, w, e, r, t, y, u, i, o, p)
+private val KeyboardState.row2: List<KeyboardItem> get() = listOf(a, s, d, f, g, h, j, k, l)
+private val KeyboardState.row3: List<KeyboardItem>
+    get() = listOf(KeyboardItem.Enter, z, x, c, v, b, n, m, KeyboardItem.Backspace)
+
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun KeyboardPreview() {
     WordleXTheme {
         Surface {
-            Keyboard(state = KeyboardState())
+            Keyboard(state = mockKeyboard)
         }
     }
 }
