@@ -5,12 +5,11 @@ plugins {
 
 android {
     namespace = "dev.jimmymorales.wordlex"
-    // compileSdk = 32
-    compileSdkPreview = "Tiramisu"
+    compileSdk = 33
     defaultConfig {
         applicationId = "dev.jimmymorales.wordlex"
         minSdk = 23
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
