@@ -7,25 +7,37 @@ data class BoardState(
     val word4: Word = Word(),
     val word5: Word = Word(),
     val word6: Word = Word(),
-    val currentWordNumber: WordNumber = WordNumber.One,
 )
 
-enum class WordNumber { One, Two, Three, Four, Five, Six, None }
+val BoardState.currentWordIndex: Int
+    get() = listOf(word1, word2, word3, word4, word5, word6)
+        .indexOfFirst(Word::isEditing)
 
-data class Word(
-    val char1: WordTile = WordTile.Empty,
-    val char2: WordTile = WordTile.Empty,
-    val char3: WordTile = WordTile.Empty,
-    val char4: WordTile = WordTile.Empty,
-    val char5: WordTile = WordTile.Empty,
-)
+operator fun BoardState.get(index: Int): Word? = when (index) {
+    Word1 -> word1
+    Word2 -> word2
+    Word3 -> word3
+    Word4 -> word4
+    Word5 -> word5
+    Word6 -> word6
+    else -> null
+}
 
-sealed class WordTile {
-    abstract val value: WordleChar
-
-    data class Filled(override val value: WordleChar) : WordTile()
-    data class Editing(override val value: WordleChar) : WordTile()
-    object Empty : WordTile() {
-        override val value = WordleChar.None
+fun BoardState.update(index: Int, word: Word): BoardState {
+    return when (index) {
+        Word1 -> copy(word1 = word)
+        Word2 -> copy(word2 = word)
+        Word3 -> copy(word3 = word)
+        Word4 -> copy(word4 = word)
+        Word5 -> copy(word5 = word)
+        Word6 -> copy(word6 = word)
+        else -> this
     }
 }
+
+private const val Word1: Int = 0
+private const val Word2: Int = 1
+private const val Word3: Int = 2
+private const val Word4: Int = 3
+private const val Word5: Int = 4
+private const val Word6: Int = 5

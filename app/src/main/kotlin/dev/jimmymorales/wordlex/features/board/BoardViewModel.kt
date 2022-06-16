@@ -2,6 +2,8 @@ package dev.jimmymorales.wordlex.features.board
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.jimmymorales.wordlex.features.board.middleware.InsertCharMiddleware
+import dev.jimmymorales.wordlex.features.board.reducers.boardReducer
 import dev.jimmymorales.wordlex.model.BoardState
 import dev.jimmymorales.wordlex.model.CharStatus
 import dev.jimmymorales.wordlex.model.KeyboardItem
@@ -15,41 +17,18 @@ import dev.jimmymorales.wordlex.mvi.Store
 import dev.jimmymorales.wordlex.mvi.ViewIntent
 import dev.jimmymorales.wordlex.mvi.ViewState
 
-class BoardViewModel : ViewModel(), Store<GameState, BoardIntent, BoardReduceAction> {
-    private val store = MviStore<GameState, BoardIntent, BoardReduceAction>(
-        initialState = mockGame,
+class BoardViewModel : ViewModel(), Store<GameState, GameIntent, GameReduceAction> {
+    private val store = MviStore(
+        initialState = GameState(),
         scope = viewModelScope,
-        /*middlewares = listOf(
-            Middleware { intent, currentState, dispatch ->
-                when (intent) {
-                    is BoardIntent.KeyPressed -> when (val key = intent.key) {
-                        is KeyboardItem.Enter -> TODO()
-                        is KeyboardItem.Backspace -> TODO()
-                        else -> dispatch(BoardReduceAction.EditTile(key as WordleChar))
-                    }
-                }
-            }
+        middlewares = listOf(
+            InsertCharMiddleware()
         ),
-        reducer = Reducer { currentState, action ->
-            when (action) {
-                is BoardReduceAction.EditTile -> {
-                    val currentWord = when (currentState.board.currentWordNumber) {
-                        WordNumber.One -> currentState.board.word1
-                        WordNumber.Two -> currentState.board.word2
-                        WordNumber.Three -> currentState.board.word3
-                        WordNumber.Four -> currentState.board.word4
-                        WordNumber.Five -> currentState.board.word5
-                        WordNumber.Six -> currentState.board.word6
-                        WordNumber.None -> TODO()
-                    }
-
-                }
-            }
-        }*/
+        reducer = boardReducer,
     )
     override val state = store.state
 
-    override fun onIntent(intent: BoardIntent) {
+    override fun onIntent(intent: GameIntent) {
         store.onIntent(intent)
     }
 }
@@ -59,12 +38,12 @@ data class GameState(
     val keyboard: KeyboardState = KeyboardState(),
 ) : ViewState
 
-sealed interface BoardIntent : ViewIntent {
-    data class KeyPressed(val key: KeyboardItem) : BoardIntent
+sealed interface GameIntent : ViewIntent {
+    data class KeyPressed(val key: KeyboardItem) : GameIntent
 }
 
-sealed interface BoardReduceAction : ReduceAction {
-    data class EditTile(val key: WordleChar) : BoardReduceAction
+sealed interface GameReduceAction : ReduceAction {
+    data class UpdateWord(val index: Int, val word: Word) : GameReduceAction
 }
 
 internal val mockBoard = BoardState(
@@ -106,7 +85,7 @@ internal val mockKeyboard = KeyboardState(
     r = WordleChar.R(status = CharStatus.ExactMatch),
 )
 
-private val mockGame = GameState(
+/*private val mockGame = GameState(
     board = mockBoard,
     keyboard = mockKeyboard,
-)
+)*/
