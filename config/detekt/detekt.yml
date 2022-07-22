@@ -42,10 +42,11 @@ console-reports:
 
 output-reports:
   active: true
-  # exclude:
+  exclude: [ ]
   # - 'TxtOutputReport'
   # - 'XmlOutputReport'
   # - 'HtmlOutputReport'
+  # - 'MdOutputReport'
 
 comments:
   active: true
@@ -491,6 +492,9 @@ style:
   active: true
   CanBeNonNullable:
     active: false
+  CascadingCallWrapping:
+    active: false
+    includeElvis: true
   ClassOrdering:
     active: false
   CollapsibleIfStatements:
@@ -537,6 +541,9 @@ style:
     ignorePackages:
       - '*.internal'
       - '*.internal.*'
+  ForbiddenSuppress:
+    active: false
+    rules: [ ]
   ForbiddenVoid:
     active: true
     ignoreOverridden: false
@@ -577,6 +584,9 @@ style:
     active: false
   MandatoryBracesLoops:
     active: false
+  MaxChainedCallsOnSameLine:
+    active: false
+    maxChainedCalls: 5
   MaxLineLength:
     active: true
     maxLineLength: 120
@@ -704,3 +714,8 @@ style:
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     excludeImports:
       - 'java.util.*'
+
+formatting:
+  active: false
+  Indentation:
+    indentSize: 2
